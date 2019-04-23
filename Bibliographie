@@ -1,5 +1,25 @@
-
 doc arduino :
 https://www.arduino.cc/en/Tutorial/CharacterAnalysis
 https://www.arduino.cc/reference/en/language/variables/data-types/stringobject/
 
+introduction à lufa:
+https://www.engineersgarage.com/article/introduction-lufa
+
+Résumé bibliothèque lufa par Redon:
+https://rex.plil.fr/Enseignement/Systeme/Systeme.IMA4/
+
+Projet IMA4 : LUFA en souris;
+https://projets-ima.plil.fr/mediawiki/index.php/IMA4_2016/2017_ECP3
+
+
+Infos protocole usb:
+http://www.rennes.supelec.fr/ren/fi/elec/docs/usb/usb.html
+
+USB : classe HID (Human Interface Device):
+http://www.rennes.supelec.fr/ren/fi/elec/docs/usb/hid.html
+
+µprojet clavier lufa hid atmega16u2:
+http://fab.cba.mit.edu/classes/863.14/people/andrew_mao/week11/
+
+usb lufa:
+https://www.engineersgarage.com/contribution/atmega-32u4-based-generic-usb-keyboard
