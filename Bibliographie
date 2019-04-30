@@ -23,3 +23,6 @@ http://fab.cba.mit.edu/classes/863.14/people/andrew_mao/week11/
 
 usb lufa:
 https://www.engineersgarage.com/contribution/atmega-32u4-based-generic-usb-keyboard
+
+Aide possible compilation LUFA:
+https://electronics.stackexchange.com/questions/24512/make-lufa-for-arduino-uno-atmega16u2
