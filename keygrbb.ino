@@ -77,16 +77,31 @@ void setup() {
 void loop() {
   // Get the currently touched pads
   currtouched = cap.touched();
+  /*
+  //effacement de la mémoire
+  if ((currtouched & _BV(/*D*/)) && !(lasttouched & _BV(/*D*/)) ) {
+    //effacer ce qui est présent dans la carte SD
+    }
+  //récupération des entrées
+  if ((currtouched & _BV(/*R*/)) && !(lasttouched & _BV(/*R*/)) ) {
+    //gérer la lecture du fichier contenant les entrées
+    //récupération des entrées
+    //Keyboard.write(entrée)
+    }
+  */
   
   for (uint8_t i=0; i<12; i++) {
     // it if *is* touched and *wasnt* touched before, alert!
     if ((currtouched & _BV(i)) && !(lasttouched & _BV(i)) ) {
       Serial.print(tab[i]); Serial.println(" touched");
+      Keyboard.press('0'+tab[i]);
     }
     // if it *was* touched and now *isnt*, alert!
     if (!(currtouched & _BV(i)) && (lasttouched & _BV(i)) ) {
       Serial.print(tab[i]); Serial.println(" released");
+      Keyboard.release('0'+tab[i]);
     }
+    if(i==1 || i==5)i++;
   }
 
   // reset our state
