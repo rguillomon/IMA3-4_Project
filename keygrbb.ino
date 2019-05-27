@@ -6,6 +6,8 @@
 #include <string.h>
 #define ti 20
 
+#include<SD.h>
+
 #ifndef _BV
 #define _BV(bit) (1 << (bit)) 
 #endif
@@ -18,6 +20,9 @@ Adafruit_MPR121 cap = Adafruit_MPR121();
 uint16_t lasttouched = 0;
 uint16_t currtouched = 0;
 int tab[]={3,7,15,2,6,14,1,5,9,0,4,8};
+File fichier;
+String filename="texte.txt";
+char c;
 
 
 void Printstr(String msg){
@@ -53,10 +58,21 @@ void setup() {
 
   //Serial
   Serial.begin(9600);
-
   while (!Serial) { // needed to keep leonardo/micro from starting too fast!
     delay(10);
   }
+
+  //SD
+  while(! SD.begin(4)){
+    delay(1000);
+  }
+  Serial.println("SD OK");
+
+  //File
+  while( !(fichier=SD.open(filename,FILE_WRITE)) ){
+    delay(1000);
+  }
+  Serial.println("file OK");
   
   //keyboard in
   Serial.println("Adafruit MPR121 Capacitive Touch sensor test"); 
@@ -74,32 +90,47 @@ void setup() {
 
 
 
+
+
+
+
+
+
+
+
+
+
 void loop() {
   // Get the currently touched pads
   currtouched = cap.touched();
   /*
   //effacement de la mémoire
-  if ((currtouched & _BV(/*D*/)) && !(lasttouched & _BV(/*D*/)) ) {
+  if ((currtouched & _BV(2)) && !(lasttouched & _BV(2)) ) {
+    Serial.println("D");
     //effacer ce qui est présent dans la carte SD
-    }
+    }*/
   //récupération des entrées
-  if ((currtouched & _BV(/*R*/)) && !(lasttouched & _BV(/*R*/)) ) {
-    //gérer la lecture du fichier contenant les entrées
-    //récupération des entrées
-    //Keyboard.write(entrée)
+  if ((currtouched & _BV(5)) && !(lasttouched & _BV(5))) {
+    Serial.println("R");
+    fichier.seek(0);
+    while((c=fichier.read())!=-1){
+      Keyboard.write(c);
     }
-  */
+  }
+ 
   
   for (uint8_t i=0; i<12; i++) {
     // it if *is* touched and *wasnt* touched before, alert!
     if ((currtouched & _BV(i)) && !(lasttouched & _BV(i)) ) {
       Serial.print(tab[i]); Serial.println(" touched");
-      Keyboard.press('0'+tab[i]);
+      c=('0'+tab[i]);
+      Keyboard.press(c);
     }
     // if it *was* touched and now *isnt*, alert!
     if (!(currtouched & _BV(i)) && (lasttouched & _BV(i)) ) {
       Serial.print(tab[i]); Serial.println(" released");
-      Keyboard.release('0'+tab[i]);
+      c=('0'+tab[i]);
+      Keyboard.release(c);
     }
     if(i==1 || i==5)i++;
   }
@@ -126,3 +157,6 @@ void loop() {
   // put a delay so it isn't overwhelming
   delay(100);
 }
+
+
+//   >v<   <v>
