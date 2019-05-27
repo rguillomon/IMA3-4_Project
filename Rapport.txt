@@ -1,0 +1,67 @@
+Rapport de Projet ¬IMA3 S6 du groupe P12 
+Titre : Fabrication d’appareille USB spécialisé dans espionnage 
+Introduction :
+Le but de notre projet est la création de périphériques USB (clavier et clef USB) incorporant des fonctionnalités propres (installation de logiciel d’espionnage, keygraber). Ces périphériques seront contrôlés par un atmega16u2.
+La durée de notre projet étant de deux ans nous avons décidé, durant la première année, de nous focaliser sur la partie software :
+-l’étude théorique (comment utiliser des bibliothèques, comment les modifier)
+-La création de maquette sur arduino, afin de voir la réalisabilité de notre projet, les problèmes rencontrés, et aussi d’avoir à notre disposition les algorithmes qui seront utilisé à la fin de notre projet .
+Ainsi durant la 2ème année nous pourrons nous focaliser sur le hardware, ce qui comprend la création des PCB pour la clef et le clavier. Et aussi leur « coque de protection »
+
+Partie théorique :
+
+Partie maquette :
+Dans la partie conception des maquettes nous avons travaillé avec une carte Arduino Leonardo.
+Nous avons fait ce choix pour plusieurs raisons :
+-l’Arduino UNO ne prend pas en charge la bibliothèque Keyboard qui nous sert à l’émulation du clavier sous l’environnement Arduino.
+- Le module micro SD (utilisé pour les deux maquettes) était un module pour Leonardo. 
+-Le Leonardo utilise un ATmega32U2 comme contrôleur USB, mais heureusement l’ATmega32U2 et l’ATmega16u2 sont quasiment les même (seul la taille de la mémoire diffère), donc le code pour l’ATmega32u2 sera compatible avec le 16u2.
+Partie 1 : La librairie Keyboard
+ Comme dit précédemment la librairie Keyboard sert à l’émulation d’un clavier sous l’environnement Arduino . Cette partie est importante car utilisé pour les deux périphériques l’un car étant un clavier, et l’autre car l’installation du logiciel espion nécessitera des commandes à taper dans le shell de Windows. 
+Dans un premier temps nous avons téléchargé et installé le logiciel Arduino qui sert à programmer l’arduino Léonardo. Par la suite nous y avons implanté la dernière version de la librairie Keyboard.
+Pour écrire notre programme, nous avons utilisé comme squelette de base le code d’exemple de l’utilisation de la librairie Keyboard fourni avec le logiciel.
+L’utilisation de la bibliothèque est plutôt simple, il suffit de lancée Keyboard.begin(). Alors l’arduino est reconnue comme un clavier. Par la suite pour rentrer des touches il faut utiliser la commande Keyboard.write() « appuie sur une touche » ou Keyboard.press() <reste appuyé sur la touche >. Le problème c’est que le programme ne nous permet que d’envoyer un caractère à la fois, ce qui est trop long pour notre utilisation. Donc pour palier à ces problèmes nous avons créé une fonction qui permet d’envoyer directe une chaine de caractère. 
+void keyboardprint ( String texte ){
+  int i = 0;
+  while (texte[i]!='\0'){
+    if(texte[i]=='@'){
+      Keyboard.write('"');
+    }
+    else if(texte[i]=='"'){
+      Keyboard.write('@');
+    }
+    else if(texte[i]=='\\'){
+      Keyboard.press(KEY_RIGHT_ALT);
+      Keyboard.press(92);
+    }
+    else {
+      Keyboard.write(texte[i]);
+      }
+    delay(ti);
+    Keyboard.releaseAll();
+    i++;
+    }
+  }
+Les problèmes que nous avons rencontrés lors de la création de ce programme se situe au niveau de l’envoie de certaines touches bien spécifique exemple @ , \ … qui ont du étre prit en compte différent des autres touche . Nous n’avons pas trouvé la source de ces erreurs.
+Partie 2 : Code sous Windows pour la clé
+Notre clef USB devra injecter des codes sous Windows afin de télécharger et d’installer le logiciel espion. Dans cette partie nous verrons le code utilisé.
+Windows possède 2 Shell diffèrent : -CMD et –PowerShell 
+Théoriquement les 2 nous permettrais de télécharger et de lancer un logiciel. Mais les essaies sous CMD n’ont pas portait leurs fruits.
+Donc nous allons utiliser PowerShell pour télécharger et installer notre logiciel espion .
+Code :
+Ouvrir power Shell en admin :
+Windows
+Powershell
+Entré + shift + entré
+<-
+Entré
+Télécharger un logiciel :
+Invoke-WebRequest –Uri «adresse du fichier» –OutFile «adresse destination + nom et type fichier» 
+«https://www.mediacollege.com/audio/tone/files/440Hz_44100Hz_16bit_30sec.mp3» -OutFile «./mp3.mp3»
+Lancer un .exe :
+"C:\Program Files\qBittorrent\qbittorrent.exe" exemple avec qbittorent
+
+Partie 3 : Gestion SD
+La gestion de la carte SD sous arduino utilise aussi une bibliothèque () 
+
+
+
