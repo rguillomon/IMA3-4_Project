@@ -19,34 +19,17 @@ Partie 1 : La librairie Keyboard
  Comme dit précédemment la librairie Keyboard sert à l’émulation d’un clavier sous l’environnement Arduino . Cette partie est importante car utilisé pour les deux périphériques l’un car étant un clavier, et l’autre car l’installation du logiciel espion nécessitera des commandes à taper dans le shell de Windows. 
 Dans un premier temps nous avons téléchargé et installé le logiciel Arduino qui sert à programmer l’arduino Léonardo. Par la suite nous y avons implanté la dernière version de la librairie Keyboard.
 Pour écrire notre programme, nous avons utilisé comme squelette de base le code d’exemple de l’utilisation de la librairie Keyboard fourni avec le logiciel.
-L’utilisation de la bibliothèque est plutôt simple, il suffit de lancée Keyboard.begin(). Alors l’arduino est reconnue comme un clavier. Par la suite pour rentrer des touches il faut utiliser la commande Keyboard.write() « appuie sur une touche » ou Keyboard.press() <reste appuyé sur la touche >. Le problème c’est que le programme ne nous permet que d’envoyer un caractère à la fois, ce qui est trop long pour notre utilisation. Donc pour palier à ces problèmes nous avons créé une fonction qui permet d’envoyer directe une chaine de caractère. 
-void keyboardprint ( String texte ){
-  int i = 0;
-  while (texte[i]!='\0'){
-    if(texte[i]=='@'){
-      Keyboard.write('"');
-    }
-    else if(texte[i]=='"'){
-      Keyboard.write('@');
-    }
-    else if(texte[i]=='\\'){
-      Keyboard.press(KEY_RIGHT_ALT);
-      Keyboard.press(92);
-    }
-    else {
-      Keyboard.write(texte[i]);
-      }
-    delay(ti);
-    Keyboard.releaseAll();
-    i++;
-    }
-  }
-Les problèmes que nous avons rencontrés lors de la création de ce programme se situe au niveau de l’envoie de certaines touches bien spécifique exemple @ , \ … qui ont du étre prit en compte différent des autres touche . Nous n’avons pas trouvé la source de ces erreurs.
+L’utilisation de la bibliothèque est plutôt simple, il suffit de lancer Keyboard.begin(). Alors l’arduino est reconnue comme un clavier. Par la suite pour rentrer des touches il faut utiliser la commande Keyboard.write() <appuie et relache> une touche ou Keyboard.press() <appuie et maintient appuyée> une touche. Le problème que ces fonctions ne prennent en paramètres qu'un unique caractère. Pour améliorer la lisibilité du code et la facilité de déboggage, nous avons créer la fonction keyboardprint(String) qui permet d'écrire toute la chaîne de caractères passer en paramètre.
+
+Les problèmes que nous avons rencontrés lors de la création de ce programme se situent au niveau de l’envoi de certaines touches bien spécifique (exemple : @ , \, #) qui ont du étre prit en compte différemment des autres touches . Nous ne sommes pas certains de la source de ces erreurs, mais il se pourrait qu'elles soient dues à une différence de définition du clavier Qwerty de la bibliothèque Arduino Keyboard et de celle utilisée par l'ordinateur.
+
 Partie 2 : Code sous Windows pour la clé
 Notre clef USB devra injecter des codes sous Windows afin de télécharger et d’installer le logiciel espion. Dans cette partie nous verrons le code utilisé.
 Windows possède 2 Shell diffèrent : -CMD et –PowerShell 
-Théoriquement les 2 nous permettrais de télécharger et de lancer un logiciel. Mais les essaies sous CMD n’ont pas portait leurs fruits.
-Donc nous allons utiliser PowerShell pour télécharger et installer notre logiciel espion .
+Théoriquement les 2 nous permettrais de télécharger et de lancer un logiciel. Mais les essaies sous CMD n’ont pas porté leurs fruits.
+Donc nous allons utiliser PowerShell pour télécharger et installer notre logiciel espion.
+
+/*à mettre en annexe
 Code :
 Ouvrir power Shell en admin :
 Windows
@@ -59,9 +42,7 @@ Invoke-WebRequest –Uri «adresse du fichier» –OutFile «adresse destination
 «https://www.mediacollege.com/audio/tone/files/440Hz_44100Hz_16bit_30sec.mp3» -OutFile «./mp3.mp3»
 Lancer un .exe :
 "C:\Program Files\qBittorrent\qbittorrent.exe" exemple avec qbittorent
+*/
 
 Partie 3 : Gestion SD
-La gestion de la carte SD sous arduino utilise aussi une bibliothèque () 
-
-
-
+La carte SD sous Arduino est gérée via la bibliothèque SD, qui inclut la bibliothèque File. La première permet de se déplacer dans le système de fichiers et d'ouvrir des fichiers dans lesquels on pourra lire et écrire.
