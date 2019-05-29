@@ -20,14 +20,20 @@ Adafruit_MPR121 cap = Adafruit_MPR121();
 uint16_t lasttouched = 0;
 uint16_t currtouched = 0;
 int tab[]={3,7,15,2,6,14,1,5,9,0,4,8};
-File fichier;
+File fichier,fichier2;
 String filename="texte.txt";
-char c;
+String filename2="texto.txt";
+char c; boolean written;
 
 
-void Printstr(String msg){
-  Serial.println(msg);
-}
+
+
+
+
+
+
+
+
 
 void keyboardprint ( String texte ){
   int i = 0;
@@ -51,6 +57,16 @@ void keyboardprint ( String texte ){
     }
   }
 
+
+
+
+
+
+
+
+
+
+
 void setup() {
   //keyboard out
    pinMode(2, INPUT_PULLUP); 
@@ -68,11 +84,17 @@ void setup() {
   }
   Serial.println("SD OK");
 
-  //File
+  //File1
   while( !(fichier=SD.open(filename,FILE_WRITE)) ){
     delay(1000);
   }
   Serial.println("file OK");
+
+  //File2
+  while( !(fichier2=SD.open(filename,FILE_WRITE)) ){
+    delay(1000);
+  }
+  Serial.println("file2 OK");
   
   //keyboard in
   Serial.println("Adafruit MPR121 Capacitive Touch sensor test"); 
@@ -103,12 +125,25 @@ void setup() {
 void loop() {
   // Get the currently touched pads
   currtouched = cap.touched();
-  /*
+  written=false;
+
+
+
+  
+  
   //effacement de la mémoire
   if ((currtouched & _BV(2)) && !(lasttouched & _BV(2)) ) {
     Serial.println("D");
+    fichier.close();
+    SD.remove(filename);
+    fichier=SD.open(filename,FILE_WRITE);
+    
+    fichier2.close();
+    SD.remove(filename2);
+    fichier=SD.open(filename2,FILE_WRITE);
+    
     //effacer ce qui est présent dans la carte SD
-    }*/
+    }
   //récupération des entrées
   if ((currtouched & _BV(5)) && !(lasttouched & _BV(5))) {
     Serial.println("R");
@@ -116,30 +151,89 @@ void loop() {
     while((c=fichier.read())!=-1){
       Keyboard.write(c);
     }
+    Keyboard.write(KEY_RETURN);
+    Keyboard.write(KEY_RETURN);
+    
+    fichier2.seek(0);
+    while((c=fichier2.read())!=-1){
+      Keyboard.write(c);
+    }
   }
- 
+
+
+
+
+
+
+
+
+
+
+
+
   
   for (uint8_t i=0; i<12; i++) {
+    
+    if(i==2 || i==5)i++;//ne pas traiter R et D
+    
     // it if *is* touched and *wasnt* touched before, alert!
     if ((currtouched & _BV(i)) && !(lasttouched & _BV(i)) ) {
+      written=true;
       Serial.print(tab[i]); Serial.println(" touched");
       c=('0'+tab[i]);
+      fichier2.write('<');
+      fichier2.write(c);
+      fichier2.write('>');
       Keyboard.press(c);
     }
+    
     // if it *was* touched and now *isnt*, alert!
     if (!(currtouched & _BV(i)) && (lasttouched & _BV(i)) ) {
+      written=true;
       Serial.print(tab[i]); Serial.println(" released");
       c=('0'+tab[i]);
+      fichier2.write('>');
+      fichier2.write(c);
+      fichier2.write('<');
+      
+      fichier.write(c);
       Keyboard.release(c);
     }
-    if(i==1 || i==5)i++;
   }
+  if(written){
+    fichier.write('\n');
+    fichier.flush();//force l'enregistrement physique des données
+    fichier2.write('\n');
+    fichier2.flush();
+  }
+
+
+
+
+
+
+
+
+
 
   // reset our state
   lasttouched = currtouched;
 
   // comment out this line for detailed data from the sensor!
   return;
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   // debugging info, what
   Serial.print("\t\t\t\t\t\t\t\t\t\t\t\t\t 0x"); Serial.println(cap.touched(), HEX);
@@ -159,4 +253,5 @@ void loop() {
 }
 
 
-//   >v<   <v>
+// v released   >v<
+// v pressed    <v>
