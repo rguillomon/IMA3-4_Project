@@ -46,3 +46,29 @@ Lancer un .exe :
 
 Partie 3 : Gestion SD
 La carte SD sous Arduino est gérée via la bibliothèque SD, qui inclut la bibliothèque File. La première permet de se déplacer dans le système de fichiers et d'ouvrir des fichiers dans lesquels on pourra lire et écrire.
+Les 2 périphériques utiliserons une carte SD (le clavier afin de stocker les touhes pressé et la clef comme stockage des instructions).
+
+La gestion de la carte SD sous arduino n’est pas la meme que sous les environment linux ou windows .Je sous-entend que la manipulation des fichiers sur la carte SD se fait nécessairement à l’aide  de code .
+
+Partie 4 : maquette du clavier :
+Pour rappel le clavier devrat se comporté comme un clavier ‘normal’ avec la focntion suplémentaire  d’enregister les imput sur la clef sd et de pouvoir suprimer les imput enregisté ou de les renvoyer sur le pc . 
+la maquette du clavier sera réalisé comme dit precedemment sur un arduinio Leonardo.Pour simplifier nous utiliserons au lieu d’un clavier ‘total’  , un clavier numérique comportent 12 entrées (0 à 9 et R (return) et D (delete)).R aura pour fonction de réinjécter les input enregisté et D suprimera les input enregisté .Le composant qui remplie la fonction de  clavier est le shield pour arduino MPR121 Cap. Touche .les touche de ce clavier sont activée par une diférence de capacité au bornes de la touche . Ce qui permet l’utilisation comme touche de quasiment n’importe quelle objet (ce qui ne nous sera pas vraiment utile ici).
+
+
+La maquette du clavier est parfaitement foncionnelle , voici en quelque ligne sont principe de fonctionnement :
+
+void setup (): initialisation : SD , Keyboard , Adafruit
+void loop (): scrutation des touches et enregistrement de celles-ci sur la carte SD, et gestion des touches spéciales R et D
+
+Pour le projet finale la structure du programme restera la meme seul le nombre d’input possible augmente .
+
+Partie 5 : Maquette clef :
+Pour rappel la clef Usb devrat : envoyer une serie d’instruction préenregistré sous forme d’input clavier et aussi servir d’adapteteur micro SD.
+Le probléme rencontré dans cette partie se situe sur la partie adaptateur micro SD .Car nous souhaitons que la prise en charge de la micro SD se fasse pa le systéme d’exploitation du pc on non celui de l’arduino . Il est possible de faire reconaitre l’arduino par le pc comme un perophérique de stockage mais alors il est impossible de le faire reconaitre comme un clavier .
+Donc nous avons crée la maquette qui  remplie la fonction de clavier , notre maquette entre les imput préenregisté (ce qui lui fait telechargé et lancer une music sous windows .
+Princpe de fonction :
+void setup ()  : initialisation du keyboard et de la SD
+void loop ()  : envoie des inputs 
+Nous avons pensé pour pouvoir faire ce que nous souhaitons , utiliser un switch qui switchera entre 2 contoleur USB différent un qui gerera le clavier et l’autre le stockage de masse .Le switch entre les 2 controleurs se fera sur l’envoie des packet de mise en veille de l’ordinateur .
+
+
