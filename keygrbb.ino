@@ -125,40 +125,38 @@ void setup() {
 void loop() {
   // Get the currently touched pads
   currtouched = cap.touched();
-  written=false;
-
+  if(currtouched!=lasttouched){
+    written=false;
 
 
   
   
-  //effacement de la mémoire
-  if ((currtouched & _BV(2)) && !(lasttouched & _BV(2)) ) {
-    Serial.println("D");
-    fichier.close();
-    SD.remove(filename);
-    fichier=SD.open(filename,FILE_WRITE);
+    //effacement de la mémoire
+    if ((currtouched & _BV(2)) && !(lasttouched & _BV(2)) ) {
+      Serial.println("D");
+      fichier.close();
+      SD.remove(filename);
+      fichier=SD.open(filename,FILE_WRITE);
     
-    fichier2.close();
-    SD.remove(filename2);
-    fichier=SD.open(filename2,FILE_WRITE);
+      fichier2.close();
+      SD.remove(filename2);
+      fichier=SD.open(filename2,FILE_WRITE);
+    }
+    //récupération des entrées
+    if ((currtouched & _BV(5)) && !(lasttouched & _BV(5))) {
+      Serial.println("R");
+      fichier.seek(0);
+      while((c=fichier.read())!=-1){
+        Keyboard.write(c);
+      }
+      Keyboard.write(KEY_RETURN);
+      Keyboard.write(KEY_RETURN);
     
-    //effacer ce qui est présent dans la carte SD
+      fichier2.seek(0);
+      while((c=fichier2.read())!=-1){
+        Keyboard.write(c);
+      }
     }
-  //récupération des entrées
-  if ((currtouched & _BV(5)) && !(lasttouched & _BV(5))) {
-    Serial.println("R");
-    fichier.seek(0);
-    while((c=fichier.read())!=-1){
-      Keyboard.write(c);
-    }
-    Keyboard.write(KEY_RETURN);
-    Keyboard.write(KEY_RETURN);
-    
-    fichier2.seek(0);
-    while((c=fichier2.read())!=-1){
-      Keyboard.write(c);
-    }
-  }
 
 
 
@@ -172,37 +170,37 @@ void loop() {
 
 
   
-  for (uint8_t i=0; i<12; i++) {
+    for (uint8_t i=0; i<12; i++) {
     
-    if(i==2 || i==5)i++;//ne pas traiter R et D
+      if(i==2 || i==5)i++;//ne pas traiter R et D
     
-    // it if *is* touched and *wasnt* touched before, alert!
-    if ((currtouched & _BV(i)) && !(lasttouched & _BV(i)) ) {
-      written=true;
-      Serial.print(tab[i]); Serial.println(" touched");
-      c=('0'+tab[i]);
-      fichier2.write('<');
-      fichier2.write(c);
-      fichier2.write('>');
-      Keyboard.press(c);
-    }
+      // it if *is* touched and *wasnt* touched before, alert!
+      if ((currtouched & _BV(i)) && !(lasttouched & _BV(i)) ) {
+        Serial.print(tab[i]); Serial.println(" touched");
+        c=('0'+tab[i]);
+        fichier2.write('<');
+        fichier2.write(c);
+        fichier2.write('>');
+        Keyboard.press(c);
+      }
     
-    // if it *was* touched and now *isnt*, alert!
-    if (!(currtouched & _BV(i)) && (lasttouched & _BV(i)) ) {
-      written=true;
-      Serial.print(tab[i]); Serial.println(" released");
-      c=('0'+tab[i]);
-      fichier2.write('>');
-      fichier2.write(c);
-      fichier2.write('<');
+      // if it *was* touched and now *isnt*, alert!
+      if (!(currtouched & _BV(i)) && (lasttouched & _BV(i)) ) {
+        written=true;
+        Serial.print(tab[i]); Serial.println(" released");
+        c=('0'+tab[i]);
+        fichier2.write('>');
+        fichier2.write(c);
+        fichier2.write('<');
       
-      fichier.write(c);
-      Keyboard.release(c);
+        fichier.write(c);
+        Keyboard.release(c);
+      }
     }
-  }
-  if(written){
-    fichier.write('\n');
-    fichier.flush();//force l'enregistrement physique des données
+    if(written){
+      fichier.write('\n');
+      fichier.flush();//force l'enregistrement physique des données
+    }
     fichier2.write('\n');
     fichier2.flush();
   }
