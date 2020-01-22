@@ -1,0 +1,10 @@
+choisir des leds (Ioh,max,µP = 25mA)
+	dimensionner les R_led
+	
+C de découplage
+
+valeur R_usb
+
+
+
+
