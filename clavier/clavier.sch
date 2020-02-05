@@ -1,5 +1,4 @@
 EESchema Schematic File Version 2
-LIBS:clavier-rescue
 LIBS:power
 LIBS:device
 LIBS:switches
@@ -282,7 +281,7 @@ F 1 "LED" H 7300 2550 50  0000 C CNN
 F 2 "" H 7300 2650 50  0001 C CNN
 F 3 "" H 7300 2650 50  0001 C CNN
 	1    7300 2650
-	0    1    1    0   
+	0    1    -1   0   
 $EndComp
 $Comp
 L LED LED_num
@@ -293,7 +292,7 @@ F 1 "LED" H 6700 2550 50  0000 C CNN
 F 2 "" H 6700 2650 50  0001 C CNN
 F 3 "" H 6700 2650 50  0001 C CNN
 	1    6700 2650
-	0    1    1    0   
+	0    1    -1   0   
 $EndComp
 $Comp
 L LED LED_maj
@@ -304,7 +303,7 @@ F 1 "LED" H 7000 2550 50  0000 C CNN
 F 2 "" H 7000 2650 50  0001 C CNN
 F 3 "" H 7000 2650 50  0001 C CNN
 	1    7000 2650
-	0    1    1    0   
+	0    1    -1   0   
 $EndComp
 $Comp
 L GNDREF #PWR?
