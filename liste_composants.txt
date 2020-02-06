@@ -1,15 +1,13 @@
+Légende :
+// = à ne pas commander
+
 x2 ATXMega16A4U-AU											https://fr.farnell.com/microchip/atxmega16a4u-au/mcu-8bit-avr-xmega-32mhz-tqfp/dp/2066301?st=atxmega16A4
 x2 Transfo 5V vers 3.3V : LM3670MF-3.3/NOPB					https://fr.farnell.com/texas-instruments/lm36703-3-nopb/ic-dc-dc-converter/dp/3122927
 	//capa 
 	//x2	10µF
 	//x2	nF
 	inductance :
-	x2	10 µH 0603											
-	-> (2 comparaisons paraissant overkill : ça)
-	- https://fr.farnell.com/webapp/wcs/stores/servlet/CompareProductsDisplay?catalogId=15001&langId=-2&storeId=10160&catentryId=65043672,64896014,64500142,64500153&pageType=PLP
-	(ou ça)
-	- https://fr.farnell.com/webapp/wcs/stores/servlet/CompareProductsDisplay?catalogId=15001&langId=-2&storeId=10160&catentryId=180685858,181397192&pageType=PLP
-	- se référer au fichier .pdf RS plutôt
+	x2	10 µH 0603							(par 10) : https://fr.rs-online.com/web/p/inductances-cms-bobinees/7242908/
 
 	
 x2 quartz 32MHz												
@@ -18,28 +16,27 @@ chercher chez mouser : https://www.mouser.fr/Passive-Components/Frequency-Contro
 
 
 (pour clavier) :
-Mémoire Flash 64Mbit Macronix mx25r6435fm2il0
+Mémoire Flash 64Mbit Macronix mx25r6435fm2il0				https://fr.farnell.com/macronix/mx25r6435fm2il0/memoire-flash-64mbit-40-a-85-c/dp/3129188
 chercher décodeur!
 
 Eclairage leds
 // x3 LEDS
 // x3 résistances (137 ohms pour Vseuil=0,6v ; OU 150ohm pour Vseuil=0,3V)
 
-embase FFC/FPC 18pins, ep0.3mm, pas 1mm		Fiches perpendiculaires à la carte
-embase FFC/FPC 8pins, ep0.3mm, pas 1mm		Fiches perpendiculaires à la carte
+embase FFC/FPC 18pins, ep0.3mm, pas 1mm, Fiches perpendiculaires à la carte		https://fr.farnell.com/jst-japan-solderless-terminals/18fmn-bmt-a-tf-lf-sn/connecteur-ffc-rcpt-18pos-1-rangee/dp/2399410
+embase FFC/FPC 8pins, ep0.3mm, pas 1mm, Fiches perpendiculaires à la carte		https://fr.farnell.com/jst-japan-solderless-terminals/08fmn-bmt-a-tf-lf-sn/connecteur-ffc-rcpt-8pos-1-rangee/dp/2399390
 
-câble avec port mâle
+//câble avec port mâle
 
 (pour clé)
-port mâle USB
-carte microSD classe 2 (ou plus)
-connecteur USB mâle
+connecteur microSD			https://fr.farnell.com/gct-global-connector-technology/mem2051-00-195-00-a/connecteur-micro-sd-8pos-cms/dp/2443092?st=connecteur%20microsd
+carte microSD classe 2 (ou plus)					https://fr.farnell.com/transcend/ts2gusdc/carte-sd-micro-2gb/dp/2290242
+connecteur USB mâle	(traversant ici)		https://fr.farnell.com/molex/48037-0001/conn-usb-2-0-usb-type-a-male-trav/dp/2067044?st=connecteur%20USB%20m%C3%A2le
 
-
-(Carte transfo icsp->PDI)
-x2 Resistance 220ohms
-x2 res 820 ohm
-x2 Diodes Zener tension inv. 3,6V
+(Carte transfo ICSP->PDI)
+// x2 Resistance 220ohms
+// x2 res 820 ohm
+// x2 Diodes Zener tension inv. 3,6V
 
 
 On ne commande pas :
