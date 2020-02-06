@@ -1,0 +1,49 @@
+x2 ATXMega16A4U-AU											https://fr.farnell.com/microchip/atxmega16a4u-au/mcu-8bit-avr-xmega-32mhz-tqfp/dp/2066301?st=atxmega16A4
+x2 Transfo 5V vers 3.3V : LM3670MF-3.3/NOPB					https://fr.farnell.com/texas-instruments/lm36703-3-nopb/ic-dc-dc-converter/dp/3122927
+	//capa 
+	//x2	10µF
+	//x2	nF
+	inductance :
+	x2	10 µH 0603											
+	-> (2 comparaisons paraissant overkill : ça)
+	- https://fr.farnell.com/webapp/wcs/stores/servlet/CompareProductsDisplay?catalogId=15001&langId=-2&storeId=10160&catentryId=65043672,64896014,64500142,64500153&pageType=PLP
+	(ou ça)
+	- https://fr.farnell.com/webapp/wcs/stores/servlet/CompareProductsDisplay?catalogId=15001&langId=-2&storeId=10160&catentryId=180685858,181397192&pageType=PLP
+	- se référer au fichier .pdf RS plutôt
+
+	
+x2 quartz 32MHz												
+https://fr.farnell.com/iqd-frequency-products/lfxtal056523/quartz-32mhz-8pf-1-6mm-x-1-2mm/dp/2627202
+chercher chez mouser : https://www.mouser.fr/Passive-Components/Frequency-Control-Timing-Devices/Crystals/_/N-6zu9fZ1yzvvqx?P=1z0wo8i
+
+
+(pour clavier) :
+Mémoire Flash 64Mbit Macronix mx25r6435fm2il0
+chercher décodeur!
+
+Eclairage leds
+// x3 LEDS
+// x3 résistances (137 ohms pour Vseuil=0,6v ; OU 150ohm pour Vseuil=0,3V)
+
+embase FFC/FPC 18pins, ep0.3mm, pas 1mm		Fiches perpendiculaires à la carte
+embase FFC/FPC 8pins, ep0.3mm, pas 1mm		Fiches perpendiculaires à la carte
+
+câble avec port mâle
+
+(pour clé)
+port mâle USB
+carte microSD classe 2 (ou plus)
+connecteur USB mâle
+
+
+(Carte transfo icsp->PDI)
+x2 Resistance 220ohms
+x2 res 820 ohm
+x2 Diodes Zener tension inv. 3,6V
+
+
+On ne commande pas :
+les leds
+les capa
+les résistances
+
