@@ -7,18 +7,15 @@ x2 Transfo 5V vers 3.3V : LM3670MF-3.3/NOPB					https://fr.farnell.com/texas-ins
 	//x2	10µF
 	//x2	nF
 	inductance :
-	x2	10 µH 0603							(par 10) : https://fr.rs-online.com/web/p/inductances-cms-bobinees/7242908/
+	x2	10 µH 0603							(package 0805) https://www.mouser.fr/ProductDetail/TDK/MLZ2012N100LTD25?qs=sGAEpiMZZMsg%252By3WlYCkU3b8Zei%252B1OAiv4buRNM4vz0%3D
 
 	
-x2 quartz 32MHz												
-https://fr.farnell.com/iqd-frequency-products/lfxtal056523/quartz-32mhz-8pf-1-6mm-x-1-2mm/dp/2627202
-chercher chez mouser : https://www.mouser.fr/Passive-Components/Frequency-Control-Timing-Devices/Crystals/_/N-6zu9fZ1yzvvqx?P=1z0wo8i
+x2 quartz 16MHz		                        https://www.mouser.fr/ProductDetail/Epson-Timing/TSX-3225-160000MF18X-AC?qs=sGAEpiMZZMukHu%252BjC5l7YcfQEONDEcl9f2MRxayG5Fs%3D
 
 
 (pour clavier) :
 Mémoire Flash 64Mbit Macronix mx25r6435fm2il0				https://fr.farnell.com/macronix/mx25r6435fm2il0/memoire-flash-64mbit-40-a-85-c/dp/3129188
-chercher décodeur!
-
+codeur/décodeur :                                           https://fr.farnell.com/texas-instruments/cd74ac238m96/decoder-demux-3-8-soic-16/dp/3006307
 Eclairage leds
 // x3 LEDS
 // x3 résistances (137 ohms pour Vseuil=0,6v ; OU 150ohm pour Vseuil=0,3V)
@@ -30,7 +27,7 @@ embase FFC/FPC 8pins, ep0.3mm, pas 1mm, Fiches perpendiculaires à la carte		htt
 
 (pour clé)
 connecteur microSD			https://fr.farnell.com/gct-global-connector-technology/mem2051-00-195-00-a/connecteur-micro-sd-8pos-cms/dp/2443092?st=connecteur%20microsd
-carte microSD classe 2 (ou plus)					https://fr.farnell.com/transcend/ts2gusdc/carte-sd-micro-2gb/dp/2290242
+carte microSD classe 2 (ou plus)					https://fr.farnell.com/delkin-devices/s404apy5q-u1000-3/memory-card-microsdhc-mlc-4gb/dp/2926005
 connecteur USB mâle	(traversant ici)		https://fr.farnell.com/molex/48037-0001/conn-usb-2-0-usb-type-a-male-trav/dp/2067044?st=connecteur%20USB%20m%C3%A2le
 
 (Carte transfo ICSP->PDI)
@@ -43,4 +40,3 @@ On ne commande pas :
 les leds
 les capa
 les résistances
-
