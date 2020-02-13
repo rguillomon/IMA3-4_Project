@@ -1,4 +1,4 @@
-update=mar. 04 févr. 2020 12:11:59 CET
+update=Thu 13 Feb 2020 11:03:19 GMT
 version=1
 last_client=kicad
 [pcbnew]
@@ -64,3 +64,5 @@ LibName32=contrib
 LibName33=valves
 LibName34=lm3670
 LibName35=mx25r6435f-sop
+LibName36=74hc238
+LibName37=quartz_TSX3225
