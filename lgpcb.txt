@@ -1,0 +1,23 @@
+longueur*largeur
+tout en mm
+129x27x1
+mesuré en ordi (0,0) en haut à gauche
+et microP en haut à gauche
+
+connecteurs
+58.0| 60.0********68.0 |70.0  *=1mm
+83.0| 85.0******************103.0 |105.0 *=1mm
+
+
+leds
+67<->123
+décalé de 27-( 4 + épaisseur=1)
+
+trous
+diamètre 2
+décalage largeur des centres 27-3.5
+décalage longueur des centres 3.5 et 130-3.5
+
+trou central 
+diamètre 7
+centre (1.5+0.8)/2
